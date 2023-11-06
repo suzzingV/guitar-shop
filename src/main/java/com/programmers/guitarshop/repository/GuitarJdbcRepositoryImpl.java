@@ -5,6 +5,7 @@ import com.programmers.guitarshop.exception.CreateException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.UUID;
 import static com.programmers.guitarshop.message.QueryMessage.*;
 import static com.programmers.guitarshop.utils.Utils.toUUID;
 
+@Repository
 public class GuitarJdbcRepositoryImpl implements GuitarRepository {
     private final NamedParameterJdbcTemplate template;
 
