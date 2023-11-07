@@ -16,8 +16,9 @@ public class Guitar {
     private final long price;
     private final long priceOfSale;
     private final String description;
+    private final String image;
 
-    public Guitar(String name, String company, String country, LocalDate manufactureDate, long price, long priceOfSale, String description) {
+    public Guitar(String name, String company, String country, LocalDate manufactureDate, long price, long priceOfSale, String description, String image) {
         this.guitarId = UUID.randomUUID();
         this.name = name;
         this.company = company;
@@ -26,9 +27,10 @@ public class Guitar {
         this.price = price;
         this.priceOfSale = priceOfSale;
         this.description = description;
+        this.image = image;
     }
 
-    public Guitar(UUID guitarId, String name, String company, String country, LocalDate manufactureDate, long price, long priceOfSale, String description) {
+    public Guitar(UUID guitarId, String name, String company, String country, LocalDate manufactureDate, long price, long priceOfSale, String description, String image) {
         this.guitarId = guitarId;
         this.name = name;
         this.company = company;
@@ -37,5 +39,6 @@ public class Guitar {
         this.price = price;
         this.priceOfSale = priceOfSale;
         this.description = description;
+        this.image = image;
     }
 }

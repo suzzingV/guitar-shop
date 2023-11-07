@@ -13,4 +13,6 @@ public interface GuitarRepository {
     public List<Guitar> findBySale();
     public Guitar update(Guitar guitar);
     public void delete(UUID guitarId);
+
+    public Guitar findById(UUID id);
 }

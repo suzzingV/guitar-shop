@@ -1,0 +1,27 @@
+.dropdown-container {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown-select {
+    appearance: none;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-select:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
