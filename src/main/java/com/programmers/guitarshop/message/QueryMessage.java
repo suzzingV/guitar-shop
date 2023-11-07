@@ -14,7 +14,9 @@ public enum QueryMessage {
     DELETE_GUITAR("delete from guitars where guitar_id = UUID_TO_BIN(:guitarId)"),
 
     CREATE_COMPANY("insert into companies (name) values(:name)"),
-    FIND_ALL_COMPANY("select * from companies");
+    FIND_ALL_COMPANY("select * from companies"),
+
+    FIND_BY_ID_ADMIN("select * from admins where id = :id");
 
     String message;
 

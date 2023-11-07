@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import axios from "axios";
 import {Route, Link, Routes, useLocation, useNavigate} from "react-router-dom";
 import GuitarDetail from "./components/GuitarDetail";
-import CompanyList from "./components/CompanyList"; // GuitarDetail 컴포넌트를 가져옴
+import CompanyList from "./components/CompanyList";
+import AdministratorLogin from "./components/AdministratorLogin"; // GuitarDetail 컴포넌트를 가져옴
 
 const appContainer = {
     maxWidth: "800px",
@@ -65,12 +66,21 @@ const imgStyle = {
     height: "100px",
 };
 
+const adminButtonStyle = {
+    padding: "5px 15px",
+    color: "#2c2c36",
+    border: "1px solid #2c2c36",
+    borderRadius: "5px",
+    cursor: "pointer",
+};
+
 function App() {
     const location = useLocation();
     const navigate = useNavigate();
 
     const [guitarList, setGuitarList] = useState([]);
     const [tabData, setTabData] = useState([]);
+    const [showAdminLogin, setShowAdminLogin] = useState(false);
 
     useEffect(() => {
         // API를 호출하여 기타 데이터를 가져옵니다.
@@ -85,8 +95,19 @@ function App() {
             .catch((error) => console.error(error));
     }, []);
 
+    const openAdminMode = () => {
+        setShowAdminLogin(true);
+        navigate("/admin/login");
+    };
+
     return (
         <div style={appContainer}>
+            {location.pathname === "/" && (
+            <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
+                <button style={adminButtonStyle} onClick={openAdminMode}>Administrator mode</button>
+            </div>
+            )}
+
             {location.pathname === "/" && ( // 경로가 루트 경로인 경우에만 출력
                 <div style={listContainer}>
                     <h1 style={{ textAlign: "center" }}>Guitar List</h1>
@@ -139,6 +160,7 @@ function App() {
             <Routes>
                 <Route path="/company/:company/byCompany" element={<CompanyList />} />
                 <Route path="/guitar/:guitarId" element={<GuitarDetail />} />
+                <Route path="/admin/login" element={<AdministratorLogin />} />
             </Routes>
         </div>
     );
