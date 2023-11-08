@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import {Link, Route, Routes, useNavigate} from "react-router-dom";
+import CompanyList from "./CompanyList";
+import GuitarDetail from "./GuitarDetail";
+import AdminGuitarList from "./AdminGuitarList";
 
 const containerStyle = {
     maxWidth: "400px",
@@ -55,15 +58,17 @@ function AdministratorLogin() {
         });
     };
 
-    const handleLogin = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
         try {
             // Axios를 사용하여 로그인 요청을 서버로 보냄
             const response = await axios.post("/api/v1/admin/login", formData);
 
+            console.log("response 받음");
             if (response.data) {
                 // 로그인 성공
                 console.log("로그인 성공");
-                navigate("/api/v1/admin");
+                navigate("/api/v1/admin")
             } else {
                 // 로그인 실패
                 setError("로그인 실패");
@@ -100,7 +105,7 @@ function AdministratorLogin() {
                 </button>
             </form>
             {error && <div style={errorStyle}>{error}</div>}
-            <Link to="/" style={backButtonStyle}>
+            <Link to="/api/v1/guitars" style={backButtonStyle}>
                 Back to list
             </Link>
         </div>

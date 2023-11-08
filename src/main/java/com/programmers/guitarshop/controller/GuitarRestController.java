@@ -1,9 +1,7 @@
 package com.programmers.guitarshop.controller;
 
-import com.programmers.guitarshop.service.AdminService;
 import com.programmers.guitarshop.service.CompanyService;
 import com.programmers.guitarshop.service.GuitarService;
-import com.programmers.guitarshop.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +65,7 @@ public class GuitarRestController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/guitar/{guitarId}")
+    @DeleteMapping("/{guitarId}")
     public void deleteGuitar(@PathVariable UUID guitarId) {
         guitarService.delete(guitarId);
     }

@@ -1,9 +1,14 @@
 import React, {useState, useEffect, useCallback} from "react";
 import axios from "axios";
-import {Route, Link, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Route, Link, Routes, useLocation, useNavigate, Navigate} from "react-router-dom";
 import GuitarDetail from "./components/GuitarDetail";
 import CompanyList from "./components/CompanyList";
-import AdministratorLogin from "./components/AdministratorLogin"; // GuitarDetail 컴포넌트를 가져옴
+import AdministratorLogin from "./components/AdministratorLogin";
+import AdminGuitarList from "./components/AdminGuitarList";
+import AddGuitar from "./components/AddGuitar";
+import AdminCompanyList from "./components/AdminCompanyList";
+import AdminGuitarDetail from "./components/AdminGuitarDetail";
+import AdminEditGuitar from "./components/AdminEditGuitar"; // GuitarDetail 컴포넌트를 가져옴
 
 const appContainer = {
     maxWidth: "800px",
@@ -80,7 +85,6 @@ function App() {
 
     const [guitarList, setGuitarList] = useState([]);
     const [tabData, setTabData] = useState([]);
-    const [showAdminLogin, setShowAdminLogin] = useState(false);
 
     useEffect(() => {
         // API를 호출하여 기타 데이터를 가져옵니다.
@@ -96,34 +100,33 @@ function App() {
     }, []);
 
     const openAdminMode = () => {
-        setShowAdminLogin(true);
-        navigate("/admin/login");
+        navigate("/api/v1/admin/login");
     };
 
     return (
         <div style={appContainer}>
-            {location.pathname === "/" && (
+            {location.pathname === "/api/v1/guitars" && (
             <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
                 <button style={adminButtonStyle} onClick={openAdminMode}>Administrator mode</button>
             </div>
             )}
 
-            {location.pathname === "/" && ( // 경로가 루트 경로인 경우에만 출력
+            {location.pathname === "/api/v1/guitars" && ( // 경로가 루트 경로인 경우에만 출력
                 <div style={listContainer}>
                     <h1 style={{ textAlign: "center" }}>Guitar List</h1>
 
                     <div style={tabContainer}>
                         <Link
-                            to="/"
-                            style={location.pathname === "/" ? tabActiveStyle : tabStyle}
+                            to="/api/v1/guitars"
+                            style={location.pathname === "/api/v1/guitars" ? tabActiveStyle : tabStyle}
                         >
                             All Guitars
                         </Link>
                         {tabData.map((tab) => (
                             <Link
                                 key={tab}
-                                to={`/company/${tab}/byCompany`} // 동적 경로 보간 사용
-                                style={location.pathname === `/company/${tab}/byCompany` ? tabActiveStyle : tabStyle}
+                                to={`/api/v1/guitars/${tab}/byCompany`} // 동적 경로 보간 사용
+                                style={location.pathname === `/api/v1/guitars/${tab}/byCompany` ? tabActiveStyle : tabStyle}
                             >
                                 {tab}
                             </Link>
@@ -143,13 +146,17 @@ function App() {
                         {guitarList.map((guitar) => (
                             <tr key={guitar.guitarId}>
                                 <td style={tdStyle}>
-                                    <img src={guitar.image} alt={guitar.name} width="100" height="100" style={imgStyle}/> {/* 이미지 렌더링 */}
+                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>
+                                        <img src={guitar.image} alt={guitar.name} width="100" height="100" style={imgStyle}/>
+                                    </Link>
                                 </td>
                                 <td style={tdStyle}>{guitar.company}</td>
                                 <td style={tdStyle}>
-                                    <Link to={`/guitar/${guitar.guitarId}`}>{guitar.name}</Link>
+                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>{guitar.name}</Link>
                                 </td>
-                                <td style={tdStyle}>{guitar.price}</td>
+                                <td style={tdStyle}>
+                                    {guitar.price - guitar.priceOfSale}
+                                </td>
                             </tr>
                         ))}
                         </tbody>
@@ -158,9 +165,14 @@ function App() {
             )}
 
             <Routes>
-                <Route path="/company/:company/byCompany" element={<CompanyList />} />
-                <Route path="/guitar/:guitarId" element={<GuitarDetail />} />
-                <Route path="/admin/login" element={<AdministratorLogin />} />
+                <Route path="/api/v1/guitars/:company/byCompany" element={<CompanyList />} />
+                <Route path="/api/v1/guitars/:guitarId" element={<GuitarDetail />} />
+                <Route path="/api/v1/admin/login" element={<AdministratorLogin />} />
+                <Route path="/api/v1/admin" element={<AdminGuitarList />} />
+                <Route path="/api/v1/guitars/guitar" element={<AddGuitar />} />
+                <Route path="/api/v1/admin/:company/byCompany" element={<AdminCompanyList />} />
+                <Route path="/api/v1/admin/edit/:guitarId" element={<AdminEditGuitar />} />
+                <Route path="/api/v1/admin/:guitarId" element={<AdminGuitarDetail />} />
             </Routes>
         </div>
     );

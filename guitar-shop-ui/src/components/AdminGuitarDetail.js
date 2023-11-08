@@ -67,23 +67,7 @@ const backButtonStyle = {
     textDecoration: "none",
 };
 
-const buttonContainer = {
-    display: "flex",
-    justifyContent: "left",
-    marginTop: "24px", // 버튼과 가격 사이에 간격을 추가합니다.
-};
-
-const buttonStyle = {
-    fontSize: "18px",
-    padding: "10px 20px",
-    margin: "0 10px",
-    border: "1px solid #2c2c36",
-    borderRadius: "5px",
-    textDecoration: "none",
-    color: "#2c2c36",
-};
-
-function GuitarDetail() {
+function AdminGuitarDetail() {
     const { guitarId } = useParams();
     const [guitar, setGuitar] = useState({});
 
@@ -112,18 +96,14 @@ function GuitarDetail() {
                     {guitar.priceOfSale <= 0 && (
                         <p style={priceStyle}>{guitar.price}원</p>
                     )}
-                    <div style={buttonContainer}>
-                        <a href="#" style={buttonStyle}>Add to Cart</a>
-                        <a href="#" style={buttonStyle}>Buy Now</a>
-                    </div>
                 </div>
             </div>
             <p><strong>Country:</strong> {guitar.country}</p>
             <p><strong>Manufacture Date:</strong> {guitar.manufactureDate}</p>
             <p><strong></strong> {guitar.description}</p>
-            <Link to="/api/v1/guitars" style={backButtonStyle}>Back to list</Link>
+            <Link to="/api/v1/admin" style={backButtonStyle}>Back to list</Link>
         </div>
     );
 }
 
-export default GuitarDetail;
+export default AdminGuitarDetail;
