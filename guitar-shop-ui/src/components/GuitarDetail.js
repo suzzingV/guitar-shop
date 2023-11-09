@@ -108,11 +108,7 @@ function GuitarDetail() {
     };
 
     const buyNow = () => {
-        axios.post(`/api/v1/cart/${guitarId}`)
-            .then((response) => {
-                navigate("/api/v1/order");
-            })
-            .catch((error) => console.error(error));
+                navigate(`/api/v1/order/${guitarId}`);
     };
 
 

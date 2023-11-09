@@ -46,4 +46,12 @@ public class OrderService {
                 });
         return responses;
     }
+
+    public OrderDetailResponse createOrder(UUID guitarId, OrderDetailRequest request) {
+        Customer customer = new Customer(request.customerId(), request.password());
+        customerRepository.create(customer);
+
+        Order order = new Order(request.name(), request.address(), customer, request.phoneNum(), request.paymentMethod(), guitarId, 1);
+        return toOrderDetailResponse(orderRepository.create(order));
+    }
 }

@@ -10,6 +10,7 @@ import AdminCompanyList from "./components/AdminCompanyList";
 import AdminGuitarDetail from "./components/AdminGuitarDetail";
 import AdminEditGuitar from "./components/AdminEditGuitar";
 import Cart from "./components/Cart";
+import GuitarCartOrder from "./components/GuitarCartOrder";
 import GuitarOrder from "./components/GuitarOrder"; // GuitarDetail 컴포넌트를 가져옴
 
 const appContainer = {
@@ -182,7 +183,8 @@ function App() {
                 <Route path="/api/v1/admin/edit/:guitarId" element={<AdminEditGuitar />} />
                 <Route path="/api/v1/admin/:guitarId" element={<AdminGuitarDetail />} />
                 <Route path="/api/v1/cart" element={<Cart/>} />
-                <Route path="/api/v1/order" element={<GuitarOrder/>} />
+                <Route path="/api/v1/order" element={<GuitarCartOrder/>} />
+                <Route path="/api/v1/order/:guitarId" element={<GuitarOrder/>} />
             </Routes>
         </div>
     );

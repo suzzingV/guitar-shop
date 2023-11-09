@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.programmers.guitarshop.dto.OrderRequest.*;
 import static com.programmers.guitarshop.dto.OrderResponse.*;
@@ -21,10 +22,19 @@ public class OrderRestController {
         this.orderService = orderService;
     }
 
-    @PostMapping
-    public ResponseEntity<List<OrderDetailResponse>> create(@RequestBody OrderDetailRequest request) {
+    @PostMapping("/cart")
+    public ResponseEntity<List<OrderDetailResponse>> createCartOrder(@RequestBody OrderDetailRequest request) {
         log.info("request: " + request);
         List<OrderDetailResponse> responses = orderService.createCartOrder(request);
+
+        log.info("response : " + responses);
+        return ResponseEntity.ok(responses);
+    }
+
+    @PostMapping("/{guitarId}")
+    public ResponseEntity<OrderDetailResponse> createOrder(@PathVariable UUID guitarId, @RequestBody OrderDetailRequest request) {
+        log.info("여기?");
+        OrderDetailResponse responses = orderService.createOrder(guitarId, request);
 
         log.info("response : " + responses);
         return ResponseEntity.ok(responses);

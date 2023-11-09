@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const formContainer = {
     maxWidth: "600px",
@@ -44,7 +44,7 @@ const backButtonStyle = {
     textDecoration: "none",
 };
 
-function GuitarOrder() {
+function GuitarCartOrder() {
     const [order, setOrder] = useState({
         customerId: "",
         password: "",
@@ -56,9 +56,6 @@ function GuitarOrder() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [isRegistrationComplete, setRegistrationComplete] = useState(false);
-
-    const { guitarId } = useParams();
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setOrder({
@@ -74,8 +71,7 @@ function GuitarOrder() {
             || order.phoneNum.trim() === "" || order.address.trim() === "" || order.paymentMethod.trim() === "") {
             setError("모든 필수 필드를 입력하세요.");
         } else {
-            console.log("유효성 성공");
-            axios.post(`/api/v1/order/${guitarId}`, order)
+            axios.post(`/api/v1/order/cart`, order)
                 .then((response) => {
                     console.log("주문");
                     navigate("/api/v1/guitars");
@@ -164,4 +160,4 @@ function GuitarOrder() {
     );
 }
 
-export default GuitarOrder;
+export default GuitarCartOrder;
