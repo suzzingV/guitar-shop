@@ -80,8 +80,8 @@ function AdminGuitarDetail() {
     }, [guitarId]);
 
     return (
-        <div style={guitarDetailContainer}>
-            <h1 style={{ textAlign: "center" }}>Guitar Detail</h1>
+        <div>
+            <h1 style={{ textAlign: "center", marginBottom: "50px"}}>Guitar Detail</h1>
             <div style={guitarInfoStyle}>
                 <img src={guitar.image} alt={guitar.name} width="300" height="300" style={imageStyle} />
                 <div>

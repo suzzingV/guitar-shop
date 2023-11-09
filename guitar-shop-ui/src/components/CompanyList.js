@@ -73,6 +73,14 @@ const adminButtonStyle = {
     marginRight: "10px",
 };
 
+const backButtonStyle = {
+    display: "block",
+    textAlign: "center",
+    color: "#333",
+    textDecoration: "underline",
+    marginTop: "10px",
+};
+
 function CompanyList() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -108,13 +116,12 @@ function CompanyList() {
             {location.pathname === `/api/v1/guitars/${company}/byCompany` && (
                 <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
                     <button style={adminButtonStyle} onClick={openCart}>Cart</button>
-                    <button style={adminButtonStyle} onClick={openAdminMode}>Administrator mode</button>
                 </div>
             )}
 
             {location.pathname === `/api/v1/guitars/${company}/byCompany` && (
                 <div style={listContainer}>
-                    <h1 style={{ textAlign: "center" }}>Guitar List</h1>
+                    <h1 style={{ textAlign: "center", marginBottom: "50px" }}>Guitar List</h1>
 
                     <div style={tabContainer}>
                         <Link
@@ -151,13 +158,17 @@ function CompanyList() {
                                 </td>
                                 <td style={tdStyle}>{guitar.company}</td>
                                 <td style={tdStyle}>
-                                    <Link to={`/guitar/${guitar.guitarId}`}>{guitar.name}</Link>
+                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>{guitar.name}</Link>
                                 </td>
                                 <td style={tdStyle}>{guitar.price.toLocaleString()} ₩</td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
+
+                    <Link to="/" style={backButtonStyle}>
+                        Go to Welcome page
+                    </Link>
                 </div>
             )}
         </div>

@@ -12,7 +12,8 @@ import AdminEditGuitar from "./components/AdminEditGuitar";
 import Cart from "./components/Cart";
 import GuitarCartOrder from "./components/GuitarCartOrder";
 import GuitarOrder from "./components/GuitarOrder";
-import GuitarList from "./components/GuitarList"; // GuitarDetail 컴포넌트를 가져옴
+import GuitarList from "./components/GuitarList";
+import Welcome from "./components/Welcome"; // GuitarDetail 컴포넌트를 가져옴
 
 const appContainer = {
     maxWidth: "800px",
@@ -101,7 +102,6 @@ function App() {
             {location.pathname === "/api/v1/guitars" && (
             <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
                 <button style={adminButtonStyle} onClick={openCart}>Cart</button>
-                <button style={adminButtonStyle} onClick={openAdminMode}>Administrator mode</button>
             </div>
             )}
 
@@ -121,6 +121,8 @@ function App() {
                 <Route path="/api/v1/cart" element={<Cart/>} />
                 <Route path="/api/v1/order" element={<GuitarCartOrder/>} />
                 <Route path="/api/v1/order/:guitarId" element={<GuitarOrder/>} />
+                <Route path="/" element={<Welcome/>} />
+
             </Routes>
         </div>
     );

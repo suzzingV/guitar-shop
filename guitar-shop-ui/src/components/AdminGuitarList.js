@@ -118,7 +118,7 @@ function AdminGuitarList() {
     }, []);
 
     const closeAdminMode = () => {
-        navigate("/api/v1/guitars");
+        navigate("/");
     };
 
     const handleEdit = (guitarId) => {
@@ -146,7 +146,7 @@ function AdminGuitarList() {
 
             {location.pathname === "/api/v1/admin" && ( // 경로가 루트 경로인 경우에만 출력
                 <div style={listContainer}>
-                    <h1 style={{ textAlign: "center" }}>Administrator mode</h1>
+                    <h1 style={{ textAlign: "center", marginBottom: "50px" }}>Administrator mode</h1>
 
                     <div style={tabContainer}>
                         <Link
@@ -179,10 +179,16 @@ function AdminGuitarList() {
                         {guitarList.map((guitar) => (
                             <tr key={guitar.guitarId}>
                                 <td style={tdStyle}>
+                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>
                                     <img src={guitar.image} alt={guitar.name} width="100" height="100" style={imgStyle}/> {/* 이미지 렌더링 */}
-                                </td>
+                                    </Link>
+                                    </td>
                                 <td style={tdStyle}>{guitar.company}</td>
-                                <td style={tdStyle}>{guitar.name}</td>
+                                <td style={tdStyle}>
+                                    <Link to={`/api/v1/admin/${guitar.guitarId}`}>
+                                        {guitar.name}
+                                    </Link>
+                                </td>
                                 <td style={tdStyle}>
                                     {guitar.price.toLocaleString()} ₩
                                 </td>
@@ -195,7 +201,7 @@ function AdminGuitarList() {
                         </tbody>
                     </table>
                     <button
-                        style={{ ...adminButtonStyle, marginTop: "10px" }}
+                        style={{ ...adminButtonStyle, marginTop: "10px"}}
                         onClick={() => navigate("/api/v1/guitars/guitar")}
                     >
                         Register guitar

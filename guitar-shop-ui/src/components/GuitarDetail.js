@@ -67,6 +67,15 @@ const backButtonStyle = {
     textDecoration: "none",
 };
 
+const adminButtonStyle = {
+    padding: "5px 15px",
+    color: "#2c2c36",
+    border: "1px solid #2c2c36",
+    borderRadius: "5px",
+    cursor: "pointer",
+    marginRight: "10px",
+};
+
 const buttonContainer = {
     display: "flex",
     justifyContent: "left",
@@ -107,6 +116,10 @@ function GuitarDetail() {
             .catch((error) => console.error(error));
     };
 
+    const openCart = () => {
+        navigate("/api/v1/cart");
+    };
+
     const buyNow = () => {
                 navigate(`/api/v1/order/${guitarId}`);
     };
@@ -114,7 +127,11 @@ function GuitarDetail() {
 
     return (
         <div>
-            <h1 style={{ textAlign: "center" }}>Guitar Detail</h1>
+            <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
+                <button style={adminButtonStyle} onClick={openCart}>Cart</button>
+            </div>
+
+            <h1 style={{marginBottom: "50px", textAlign: "center" }}>Guitar Detail</h1>
             <div style={guitarInfoStyle}>
                 <img src={guitar.image} alt={guitar.name} width="300" height="300" style={imageStyle} />
                 <div>

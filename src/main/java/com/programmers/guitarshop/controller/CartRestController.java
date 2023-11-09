@@ -51,4 +51,9 @@ public class CartRestController {
     public void deleteCart(@PathVariable UUID guitarId) {
         service.delete(guitarId);
     }
+
+    @DeleteMapping
+    public void deleteAll() {
+        service.deleteAll();
+    }
 }

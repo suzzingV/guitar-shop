@@ -51,6 +51,14 @@ const imgStyle = {
     height: "100px",
 };
 
+const backButtonStyle = {
+    display: "block",
+    textAlign: "center",
+    color: "#333",
+    textDecoration: "underline",
+    marginTop: "10px",
+};
+
 function GuitarList() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -73,7 +81,7 @@ function GuitarList() {
 
     return (
         <div style={listContainer}>
-            <h1 style={{ textAlign: "center" }}>Guitar List</h1>
+            <h1 style={{ textAlign: "center", marginBottom: "50px" }}>Guitar List</h1>
 
             <div style={tabContainer}>
                 <Link
@@ -133,6 +141,9 @@ function GuitarList() {
                 ))}
                 </tbody>
             </table>
+            <Link to="/" style={backButtonStyle}>
+                Go to Welcome page
+            </Link>
         </div>
     );
 }

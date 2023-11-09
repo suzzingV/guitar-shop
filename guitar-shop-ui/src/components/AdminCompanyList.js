@@ -120,7 +120,7 @@ function AdminCompanyList() {
     }, [company]);
 
     const closeAdminMode = () => {
-        navigate("/api/v1/guitars");
+        navigate("/");
     };
 
     const handleEdit = (guitarId) => {
@@ -148,7 +148,7 @@ function AdminCompanyList() {
 
             {location.pathname === `/api/v1/admin/${company}/byCompany` && (
                 <div style={listContainer}>
-                    <h1 style={{ textAlign: "center" }}>Administrator mode</h1>
+                    <h1 style={{ textAlign: "center", marginBottom: "50px" }}>Administrator mode</h1>
 
                     <div style={tabContainer}>
                         <Link
@@ -182,10 +182,16 @@ function AdminCompanyList() {
                         {guitarList.map((guitar) => (
                             <tr key={guitar.guitarId}>
                                 <td style={tdStyle}>
-                                    <img src={guitar.image} alt={guitar.name} width="100" height="100" style={imgStyle}/> {/* 이미지 렌더링 */}
+                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>
+                                        <img src={guitar.image} alt={guitar.name} width="100" height="100" style={imgStyle}/> {/* 이미지 렌더링 */}
+                                    </Link>
                                 </td>
                                 <td style={tdStyle}>{guitar.company}</td>
-                                <td style={tdStyle}>{guitar.name}</td>
+                                <td style={tdStyle}>
+                                    <Link to={`/api/v1/admin/${guitar.guitarId}`}>
+                                    {guitar.name}
+                                </Link>
+                                </td>
                                 <td style={tdStyle}>{guitar.price.toLocaleString()} ₩</td>
                                 <td style={tdStyle}>
                                     <button style={editButtonStyle} onClick={() => handleEdit(guitar.guitarId)}>Edit</button>

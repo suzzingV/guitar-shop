@@ -2,38 +2,55 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {Link, useNavigate, useParams} from "react-router-dom";
 
+const formContainer = {
+    maxWidth: "600px",
+    margin: "0 auto",
+    padding: "20px",
+    border: "1px solid #ddd",
+    borderRadius: "5px",
+    boxShadow: "0 0 5px #ddd",
+    backgroundColor: "#f5f5f5",
+};
+
+const formStyle = {
+    marginTop: "52px",
+    display: "flex",
+    flexDirection: "column",
+};
+
 const inputStyle = {
     marginBottom: "10px",
-    padding: "10px 120px",
+    padding: "10px",
     border: "1px solid #ccc",
     borderRadius: "5px",
-    textAlign: "left",
+};
+
+const buttonStyle = {
+    padding: "12px",
+    background: "#333",
+    color: "#fff",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "18px",
+    fontWeight: "bold",
+    marginTop: "10px",
+};
+
+const errorStyle = {
+    color: "red",
 };
 
 const backButtonStyle = {
-    fontSize: "15px",
-    padding: "10px 20px",
-    margin: "0 10px",
-    border: "1px solid #2c2c36",
-    borderRadius: "5px",
-    textDecoration: "none",
-    color: "#fff",
-    background: "#2c2c36",
+    marginTop: "10px",
+    display: "block",
+    textAlign: "center",
+    color: "#333",
+    textDecoration: "underline",
+    fontSize: "16px",
 };
 
-const updateButtonStyle = {
-    fontSize: "15px",
-    padding: "10px 20px",
-    margin: "0 10px",
-    border: "1px solid #2c2c36",
-    borderRadius: "5px",
-    textDecoration: "none",
-    color: "#fff",
-    background: "#2c2c36",
-}
-
 const labelStyle = {
-    marginBottom: "5px", // 항목 이름과 입력 필드 사이의 간격 설정
+    marginBottom: "15px", // 항목 이름과 입력 필드 사이의 간격 설정
     fontWeight: "bold",
     marginRight: "10px",
 };
@@ -90,109 +107,101 @@ const AdminEditGuitar = () => {
             });
     };
 
-    const handleBackToList = () => {
-        navigate('/api/v1/admin');
-    };
-
     return (
         <div>
-            <h1>Edit Guitar</h1>
-            <form>
-                <div>
-                <label style={labelStyle}>Guitar Name</label>
-                <input
+            <h1 style={{textAlign: "center", marginBottom: "50px"}}>Edit Guitar</h1>
+            <form style={formStyle}>
+                    <div>
+                        <label style={labelStyle}>Guitar Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Guitar Name"
+                            value={guitar.name}
+                            onChange={handleInputChange}
+                            style={inputStyle}
+                        />
+                    </div>
+                    <div>
+                        <label style={labelStyle}>Company</label>
+                        <input
+                            type="text"
+                            name="company"
+                            placeholder="Company"
+                            value={guitar.company}
+                            onChange={handleInputChange}
+                            style={inputStyle}
+                        />
+                    </div>
+                    <div>
+                        <label style={labelStyle}>Country</label>
+                        <input
+                            type="text"
+                            name="country"
+                            placeholder="Country"
+                            value={guitar.country}
+                            onChange={handleInputChange}
+                            style={inputStyle}
+                        />
+                    </div>
+                    <div>
+                        <label style={labelStyle}>Manufacture date</label>
+                        <input
+                            type="text"
+                            name="manufactureDate"
+                            placeholder="YYYY-MM-DD"
+                            value={guitar.manufactureDate}
+                            onChange={handleInputChange}
+                            style={inputStyle}
+                        />
+                    </div>
+                    <div>
+                        <label style={labelStyle}>Price</label>
+                        <input
+                            type="number"
+                            name="price"
+                            placeholder="Input only number"
+                            value={guitar.price}
+                            onChange={handleInputChange}
+                            style={inputStyle}
+                        />
+                    </div>
+                    <div>
+                        <label style={labelStyle}>Price Of Sale</label>
+                        <input
+                            type="number"
+                            name="priceOfSale"
+                            placeholder="Input only number"
+                            value={guitar.priceOfSale}
+                            onChange={handleInputChange}
+                            style={inputStyle}
+                        />
+                    </div>
+                    <label style={labelStyle}>Description</label>
+                    <div>
+                <textarea
                     type="text"
-                    name="name"
-                    placeholder="Guitar Name"
-                    value={guitar.name}
+                    name="description"
+                    value={guitar.description}
                     onChange={handleInputChange}
-                    style={inputStyle}
+                    style={{...inputStyle, flex: "1", height: "100px", width: "80%"}}
                 />
-                </div>
-                <div>
-                    <label style={labelStyle}>Company</label>
-                <input
-                    type="text"
-                    name="company"
-                    placeholder="Company"
-                    value={guitar.company}
-                    onChange={handleInputChange}
-                    style={inputStyle}
-                />
-                </div>
-                <div>
-                    <label style={labelStyle}>Country</label>
-                <input
-                    type="text"
-                    name="country"
-                    placeholder="Country"
-                    value={guitar.country}
-                    onChange={handleInputChange}
-                    style={inputStyle}
-                />
-                </div>
-                <div>
-                    <label style={labelStyle}>Manufacture Date</label>
-                <input
-                    type="text"
-                    name="manufactureDate"
-                    placeholder="Manufacture date"
-                    value={guitar.manufactureDate}
-                    onChange={handleInputChange}
-                    style={inputStyle}
-                />
-                </div>
-                <div>
-                    <label style={labelStyle}>Price</label>
-                <input
-                    type="number"
-                    name="price"
-                    placeholder="Price"
-                    value={guitar.price}
-                    onChange={handleInputChange}
-                    style={inputStyle}
-                />
-                </div>
-                <div>
-                    <label style={labelStyle}>Price Of Sale</label>
-                <input
-                    type="number"
-                    name="priceOfSale"
-                    placeholder="PriceOfSale"
-                    value={guitar.priceOfSale}
-                    onChange={handleInputChange}
-                    style={inputStyle}
-                />
-                </div>
-                <div>
-                    <label style={{marginBottom: "20px", // 항목 이름과 입력 필드 사이의 간격 설정
-                        fontWeight: "bold",
-                        marginRight: "10px",}}>Description</label>
-                    <input
-                        type="text"
-                        name="description"
-                        placeholder="Description"
-                        value={guitar.description}
-                        onChange={handleInputChange}
-                        style={{marginBottom: "10px",
-                            padding: "50px 120px",
-                            border: "1px solid #ccc",
-                            borderRadius: "5px",}}
-                    />
-                </div>
-                <div>
-                    <label style={labelStyle}>Image Link</label>
-                <input
-                    type="text"
-                    name="image"
-                    placeholder="Image"
-                    value={guitar.image}
-                    onChange={handleInputChange}
-                    style={inputStyle}
-                />
-                </div>
-                <button style={updateButtonStyle} onClick={handleUpdateGuitar}>Update</button>
-                <button style={backButtonStyle} onClick={handleBackToList}>Back to list</button>
+                    </div>
+                    <div>
+                        <label style={labelStyle}>Image</label>
+                        <input
+                            type="text"
+                            name="image"
+                            placeholder="Image Link"
+                            value={guitar.image}
+                            onChange={handleInputChange}
+                            style={{...inputStyle, width: "70%"}}
+                        />
+                    </div>
+                <button onClick={handleUpdateGuitar} style={buttonStyle}>
+                    Update
+                </button>
+                <Link style={backButtonStyle} to="/api/v1/admin">Back to list</Link>
             </form>
             {error && <div style={{ color: "red" }}>{error}</div>}
         </div>

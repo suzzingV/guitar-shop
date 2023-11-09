@@ -180,13 +180,13 @@ function Cart() {
         <div>
             {location.pathname === "/api/v1/cart" && (
                 <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
-                    <button style={adminButtonStyle} onClick={backToList}>Back to list</button>
+                    <button style={adminButtonStyle} onClick={backToList}>More shopping</button>
                 </div>
             )}
 
             {location.pathname === "/api/v1/cart" && ( // 경로가 루트 경로인 경우에만 출력
                 <div style={listContainer}>
-                    <h1 style={{ textAlign: "center" }}>Cart</h1>
+                    <h1 style={{ textAlign: "center", marginBottom: "50px" }}>Cart</h1>
                     <table style={tableStyle}>
                         <thead>
                         <tr>
@@ -202,10 +202,16 @@ function Cart() {
                         {guitarList.map((guitar) => (
                             <tr key={guitar.guitarId}>
                                 <td style={tdStyle}>
-                                    <img src={guitar.image} alt={guitar.name} width="100" height="100" style={imgStyle}/> {/* 이미지 렌더링 */}
-                                </td>
+                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>
+                                        <img src={guitar.image} alt={guitar.name} width="100" height="100" style={imgStyle}/> {/* 이미지 렌더링 */}
+                                    </Link>
+                                    </td>
                                 <td style={tdStyle}>{guitar.company}</td>
-                                <td style={tdStyle}>{guitar.name}</td>
+                                <td style={tdStyle}>
+                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>
+                                    {guitar.name}
+                                </Link>
+                                </td>
                                 <td style={tdStyle}>
                                     {guitar.price.toLocaleString()} ₩
                                 </td>

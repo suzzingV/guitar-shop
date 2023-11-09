@@ -13,6 +13,7 @@ const containerStyle = {
 const formStyle = {
     display: "flex",
     flexDirection: "column",
+    marginTop: "40px",
 };
 
 const inputStyle = {
@@ -28,6 +29,7 @@ const buttonStyle = {
     color: "#fff",
     borderRadius: "5px",
     cursor: "pointer",
+    fontWeight: "bold",
 };
 
 const errorStyle = {
@@ -35,10 +37,11 @@ const errorStyle = {
 };
 
 const backButtonStyle = {
+    marginTop: "10px",
     display: "block",
     textAlign: "center",
     color: "#333",
-    textDecoration: "none",
+    textDecoration: "underline",
 };
 
 function AdministratorLogin() {
@@ -87,7 +90,7 @@ function AdministratorLogin() {
                 <input
                     type="id"
                     name="id"
-                    placeholder="아이디"
+                    placeholder="ID"
                     value={formData.id}
                     onChange={handleInputChange}
                     style={inputStyle}
@@ -95,18 +98,18 @@ function AdministratorLogin() {
                 <input
                     type="password"
                     name="password"
-                    placeholder="비밀번호"
+                    placeholder="Password"
                     value={formData.password}
                     onChange={handleInputChange}
                     style={inputStyle}
                 />
                 <button onClick={handleLogin} style={buttonStyle}>
-                    로그인
+                    Login
                 </button>
             </form>
             {error && <div style={errorStyle}>{error}</div>}
-            <Link to="/api/v1/guitars" style={backButtonStyle}>
-                Back to list
+            <Link to="/" style={backButtonStyle}>
+                Go to Welcome page
             </Link>
         </div>
     );

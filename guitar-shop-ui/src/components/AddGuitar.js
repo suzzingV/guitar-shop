@@ -13,6 +13,7 @@ const formContainer = {
 };
 
 const formStyle = {
+    marginTop: "52px",
     display: "flex",
     flexDirection: "column",
 };
@@ -25,11 +26,14 @@ const inputStyle = {
 };
 
 const buttonStyle = {
-    padding: "10px",
+    padding: "12px",
     background: "#333",
     color: "#fff",
     borderRadius: "5px",
     cursor: "pointer",
+    fontSize: "18px",
+    fontWeight: "bold",
+    marginTop: "10px",
 };
 
 const errorStyle = {
@@ -41,7 +45,14 @@ const backButtonStyle = {
     display: "block",
     textAlign: "center",
     color: "#333",
-    textDecoration: "none",
+    textDecoration: "underline",
+    fontSize: "16px",
+};
+
+const labelStyle = {
+    marginBottom: "15px", // 항목 이름과 입력 필드 사이의 간격 설정
+    fontWeight: "bold",
+    marginRight: "10px",
 };
 
 function AddGuitar() {
@@ -93,8 +104,10 @@ function AddGuitar() {
 
     return (
         <div>
-            <h1>Add New Guitar</h1>
+            <h1 style={{textAlign: "center"}}>Add New Guitar</h1>
             <form style={formStyle}>
+                <div>
+                <label style={labelStyle}>Guitar Name</label>
                 <input
                     type="text"
                     name="name"
@@ -103,6 +116,9 @@ function AddGuitar() {
                     onChange={handleInputChange}
                     style={inputStyle}
                 />
+                </div>
+                <div>
+                    <label style={labelStyle}>Company</label>
                 <input
                     type="text"
                     name="company"
@@ -111,6 +127,9 @@ function AddGuitar() {
                     onChange={handleInputChange}
                     style={inputStyle}
                 />
+                </div>
+                <div>
+                    <label style={labelStyle}>Country</label>
                 <input
                     type="text"
                     name="country"
@@ -119,46 +138,61 @@ function AddGuitar() {
                     onChange={handleInputChange}
                     style={inputStyle}
                 />
+                </div>
+                <div>
+                    <label style={labelStyle}>Manufacture date</label>
                 <input
                     type="text"
                     name="manufactureDate"
-                    placeholder="Manufacture date"
+                    placeholder="YYYY-MM-DD"
                     value={guitar.manufactureDate}
                     onChange={handleInputChange}
                     style={inputStyle}
                 />
+                </div>
+                <div>
+                    <label style={labelStyle}>Price</label>
                 <input
                     type="number"
                     name="price"
-                    placeholder="Price"
+                    placeholder="Input only number"
                     value={guitar.price}
                     onChange={handleInputChange}
                     style={inputStyle}
                 />
+                </div>
+                <div>
+                    <label style={labelStyle}>Price Of Sale</label>
                 <input
                     type="number"
                     name="priceOfSale"
-                    placeholder="PriceOfSale"
+                    placeholder="Input only number"
                     value={guitar.priceOfSale}
                     onChange={handleInputChange}
                     style={inputStyle}
                 />
-                <input
+                </div>
+                <label style={labelStyle}>Description</label>
+                <div>
+                <textarea
                     type="text"
                     name="description"
-                    placeholder="Description"
                     value={guitar.description}
                     onChange={handleInputChange}
-                    style={inputStyle}
+                    style={{...inputStyle, flex: "1", height: "100px", width: "80%"}}
                 />
+                </div>
+                <div>
+                    <label style={labelStyle}>Image</label>
                 <input
                     type="text"
                     name="image"
-                    placeholder="Image"
+                    placeholder="Image Link"
                     value={guitar.image}
                     onChange={handleInputChange}
-                    style={inputStyle}
+                    style={{...inputStyle, width: "70%"}}
                 />
+                </div>
                 <button onClick={handleAddGuitar} style={buttonStyle}>
                     Register
                 </button>
