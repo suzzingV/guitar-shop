@@ -89,12 +89,12 @@ function AdminGuitarDetail() {
                     <p style={nameStyle}>{guitar.name}</p>
                     {guitar.priceOfSale > 0 && (
                         <div style={priceContainer}>
-                            <span style={originalPriceStyle}>{guitar.price}원</span>
-                            <span style={priceStyle}>{guitar.price - guitar.priceOfSale}원</span>
+                            <span style={originalPriceStyle}>{guitar.price.toLocaleString()} ₩</span>
+                            <span style={priceStyle}>{(guitar.price - guitar.priceOfSale).toLocaleString()} ₩</span>
                         </div>
                     )}
                     {guitar.priceOfSale <= 0 && (
-                        <p style={priceStyle}>{guitar.price}원</p>
+                        <p style={priceStyle}>{guitar.price.toLocaleString()} ₩</p>
                     )}
                 </div>
             </div>

@@ -37,13 +37,10 @@ const errorStyle = {
 };
 
 const backButtonStyle = {
+    marginTop: "10px",
     display: "block",
-    fontSize: "18px",
     textAlign: "center",
-    backgroundColor: "#333",
-    color: "#fff",
-    padding: "10px 20px",
-    borderRadius: "5px",
+    color: "#333",
     textDecoration: "none",
 };
 
@@ -95,7 +92,7 @@ function AddGuitar() {
     };
 
     return (
-        <div style={formContainer}>
+        <div>
             <h1>Add New Guitar</h1>
             <form style={formStyle}>
                 <input
@@ -174,7 +171,7 @@ function AddGuitar() {
                     </div>
                 )}
 
-                <Link to="/api/v1/admin" style={backButtonStyle}>Back to list</Link>
+                <Link style={backButtonStyle} to="/api/v1/admin">Back to list</Link>
             </form>
         </div>
     );

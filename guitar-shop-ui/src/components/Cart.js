@@ -177,7 +177,7 @@ function Cart() {
     };
 
     return (
-        <div style={appContainer}>
+        <div>
             {location.pathname === "/api/v1/cart" && (
                 <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
                     <button style={adminButtonStyle} onClick={backToList}>Back to list</button>
@@ -207,7 +207,7 @@ function Cart() {
                                 <td style={tdStyle}>{guitar.company}</td>
                                 <td style={tdStyle}>{guitar.name}</td>
                                 <td style={tdStyle}>
-                                    {guitar.price}
+                                    {guitar.price.toLocaleString()} ₩
                                 </td>
                                 <td style={tdStyle}>
                                     <button style={quantityButtonStyle} onClick={() => handleDecrease(guitar.guitarId)}>-</button>
@@ -223,6 +223,9 @@ function Cart() {
                     </table>
                 </div>
             )}
+            <div>
+                <h1 style={{ textAlign: "right", fontSize: "25px"}}>Total price: {guitarList.reduce((total, guitar) => total + (guitar.price * guitar.quantity), 0).toLocaleString()} ₩</h1>
+            </div>
             <Link to="/api/v1/order" style={orderButtonStyle}>Order</Link>
         </div>
     );

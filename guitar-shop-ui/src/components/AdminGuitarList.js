@@ -137,7 +137,7 @@ function AdminGuitarList() {
     };
 
     return (
-        <div style={appContainer}>
+        <div>
             {location.pathname === "/api/v1/admin" && (
                 <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
                     <button style={adminButtonStyle} onClick={closeAdminMode}>Close administrator mode</button>
@@ -184,7 +184,7 @@ function AdminGuitarList() {
                                 <td style={tdStyle}>{guitar.company}</td>
                                 <td style={tdStyle}>{guitar.name}</td>
                                 <td style={tdStyle}>
-                                    {guitar.price}
+                                    {guitar.price.toLocaleString()} ₩
                                 </td>
                                 <td style={tdStyle}>
                                     <button style={editButtonStyle} onClick={() => handleEdit(guitar.guitarId)}>Edit</button>

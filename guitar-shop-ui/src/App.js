@@ -9,7 +9,8 @@ import AddGuitar from "./components/AddGuitar";
 import AdminCompanyList from "./components/AdminCompanyList";
 import AdminGuitarDetail from "./components/AdminGuitarDetail";
 import AdminEditGuitar from "./components/AdminEditGuitar";
-import Cart from "./components/Cart"; // GuitarDetail 컴포넌트를 가져옴
+import Cart from "./components/Cart";
+import GuitarOrder from "./components/GuitarOrder"; // GuitarDetail 컴포넌트를 가져옴
 
 const appContainer = {
     maxWidth: "800px",
@@ -162,7 +163,7 @@ function App() {
                                     <Link to={`/api/v1/guitars/${guitar.guitarId}`}>{guitar.name}</Link>
                                 </td>
                                 <td style={tdStyle}>
-                                    {guitar.price - guitar.priceOfSale}
+                                    {(guitar.price - guitar.priceOfSale).toLocaleString()} ₩
                                 </td>
                             </tr>
                         ))}
@@ -181,6 +182,7 @@ function App() {
                 <Route path="/api/v1/admin/edit/:guitarId" element={<AdminEditGuitar />} />
                 <Route path="/api/v1/admin/:guitarId" element={<AdminGuitarDetail />} />
                 <Route path="/api/v1/cart" element={<Cart/>} />
+                <Route path="/api/v1/order" element={<GuitarOrder/>} />
             </Routes>
         </div>
     );

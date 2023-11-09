@@ -11,15 +11,26 @@ const inputStyle = {
 };
 
 const backButtonStyle = {
-    display: "block",
-    fontSize: "18px",
-    textAlign: "center",
-    backgroundColor: "#333",
-    color: "#fff",
+    fontSize: "15px",
     padding: "10px 20px",
+    margin: "0 10px",
+    border: "1px solid #2c2c36",
     borderRadius: "5px",
     textDecoration: "none",
+    color: "#fff",
+    background: "#2c2c36",
 };
+
+const updateButtonStyle = {
+    fontSize: "15px",
+    padding: "10px 20px",
+    margin: "0 10px",
+    border: "1px solid #2c2c36",
+    borderRadius: "5px",
+    textDecoration: "none",
+    color: "#fff",
+    background: "#2c2c36",
+}
 
 const labelStyle = {
     marginBottom: "5px", // 항목 이름과 입력 필드 사이의 간격 설정
@@ -77,6 +88,10 @@ const AdminEditGuitar = () => {
                 setError("기타 정보를 업데이트하는 중 오류 발생");
                 console.error(error);
             });
+    };
+
+    const handleBackToList = () => {
+        navigate('/api/v1/admin');
     };
 
     return (
@@ -176,8 +191,8 @@ const AdminEditGuitar = () => {
                     style={inputStyle}
                 />
                 </div>
-                <button style={backButtonStyle} onClick={handleUpdateGuitar}>Update</button>
-                <Link to="/api/v1/admin" style={backButtonStyle}>Back to list</Link>
+                <button style={updateButtonStyle} onClick={handleUpdateGuitar}>Update</button>
+                <button style={backButtonStyle} onClick={handleBackToList}>Back to list</button>
             </form>
             {error && <div style={{ color: "red" }}>{error}</div>}
         </div>

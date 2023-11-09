@@ -98,10 +98,15 @@ function CompanyList() {
         navigate("/api/v1/admin/login");
     };
 
+    const openCart = () => {
+        navigate("/api/v1/cart");
+    };
+
     return (
-        <div style={appContainer}>
+        <div>
             {location.pathname === `/api/v1/guitars/${company}/byCompany` && (
                 <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
+                    <button style={adminButtonStyle} onClick={openCart}>Cart</button>
                     <button style={adminButtonStyle} onClick={openAdminMode}>Administrator mode</button>
                 </div>
             )}
@@ -147,7 +152,7 @@ function CompanyList() {
                                 <td style={tdStyle}>
                                     <Link to={`/guitar/${guitar.guitarId}`}>{guitar.name}</Link>
                                 </td>
-                                <td style={tdStyle}>{guitar.price}</td>
+                                <td style={tdStyle}>{guitar.price.toLocaleString()} ₩</td>
                             </tr>
                         ))}
                         </tbody>

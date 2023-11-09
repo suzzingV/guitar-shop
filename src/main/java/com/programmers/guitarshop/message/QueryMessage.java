@@ -16,8 +16,11 @@ public enum QueryMessage {
     CREATE_COMPANY("insert ignore into companies (name) values(:name)"),
     FIND_ALL_COMPANY("select * from companies"),
 
-    FIND_BY_ID_ADMIN("select * from admins where id = :id");
+    FIND_BY_ID_ADMIN("select * from admins where id = :id"),
 
+    CREATE_ORDER("insert into orders (order_id, customer_id, name, address, phone_num, payment_method, guitar_id, quantity) values (UUID_TO_BIN(:orderId), :customerId, :name, :address, :phoneNum, :paymentMethod, UUID_TO_BIN(:guitarId), :quantity)"),
+
+    CREATE_CUSTOMER("insert ignore into customers (customer_id, password) values (:customerId, :password)");
     String message;
 
     QueryMessage(String message) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 const guitarDetailContainer = {
     maxWidth: "800px",
@@ -84,6 +84,7 @@ const buttonStyle = {
 };
 
 function GuitarDetail() {
+    const navigate = useNavigate();
     const { guitarId } = useParams();
     const [guitar, setGuitar] = useState({});
 
@@ -106,6 +107,14 @@ function GuitarDetail() {
             .catch((error) => console.error(error));
     };
 
+    const buyNow = () => {
+        axios.post(`/api/v1/cart/${guitarId}`)
+            .then((response) => {
+                navigate("/api/v1/order");
+            })
+            .catch((error) => console.error(error));
+    };
+
 
     return (
         <div style={guitarDetailContainer}>
@@ -117,16 +126,16 @@ function GuitarDetail() {
                     <p style={nameStyle}>{guitar.name}</p>
                     {guitar.priceOfSale > 0 && (
                         <div style={priceContainer}>
-                            <span style={originalPriceStyle}>{guitar.price}원</span>
-                            <span style={priceStyle}>{guitar.price - guitar.priceOfSale}원</span>
+                            <span style={originalPriceStyle}>{guitar.price.toLocaleString()} ₩</span>
+                            <span style={priceStyle}>{(guitar.price - guitar.priceOfSale).toLocaleString()} ₩</span>
                         </div>
                     )}
                     {guitar.priceOfSale <= 0 && (
-                        <p style={priceStyle}>{guitar.price}원</p>
+                        <p style={priceStyle}>{guitar.price.toLocaleString()} ₩</p>
                     )}
                     <div style={buttonContainer}>
                         <button onClick={addToCart} style={buttonStyle}>Add to Cart</button>
-                        <a href="#" style={buttonStyle}>Buy Now</a>
+                        <button onClick={buyNow} style={buttonStyle}>Buy Now</button>
                     </div>
                 </div>
             </div>
