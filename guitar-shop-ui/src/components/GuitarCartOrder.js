@@ -99,6 +99,7 @@ function GuitarCartOrder() {
             axios.delete('/api/v1/cart')
                 .then(() => {
                     console.log("카트 비우기 성공");
+                    window.alert("주문을 완료했습니다.");
                     navigate("/api/v1/guitars");
                 })
                 .catch((error) => {
