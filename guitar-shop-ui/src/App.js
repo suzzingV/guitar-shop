@@ -11,7 +11,8 @@ import AdminGuitarDetail from "./components/AdminGuitarDetail";
 import AdminEditGuitar from "./components/AdminEditGuitar";
 import Cart from "./components/Cart";
 import GuitarCartOrder from "./components/GuitarCartOrder";
-import GuitarOrder from "./components/GuitarOrder"; // GuitarDetail 컴포넌트를 가져옴
+import GuitarOrder from "./components/GuitarOrder";
+import GuitarList from "./components/GuitarList"; // GuitarDetail 컴포넌트를 가져옴
 
 const appContainer = {
     maxWidth: "800px",
@@ -87,22 +88,6 @@ function App() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [guitarList, setGuitarList] = useState([]);
-    const [tabData, setTabData] = useState([]);
-
-    useEffect(() => {
-        // API를 호출하여 기타 데이터를 가져옵니다.
-        axios.get('/api/v1/guitars')
-            .then((response) => {
-                const data = response.data;
-                const guitarListData = data.byCompany;
-                const tabData = data.tabList; // 'tab' 키에 해당하는 데이터 가져오기
-                setGuitarList(guitarListData);
-                setTabData(tabData); // tabData 상태 업데이트
-            })
-            .catch((error) => console.error(error));
-    }, []);
-
     const openAdminMode = () => {
         navigate("/api/v1/admin/login");
     };
@@ -121,56 +106,7 @@ function App() {
             )}
 
             {location.pathname === "/api/v1/guitars" && ( // 경로가 루트 경로인 경우에만 출력
-                <div style={listContainer}>
-                    <h1 style={{ textAlign: "center" }}>Guitar List</h1>
-
-                    <div style={tabContainer}>
-                        <Link
-                            to="/api/v1/guitars"
-                            style={location.pathname === "/api/v1/guitars" ? tabActiveStyle : tabStyle}
-                        >
-                            All Guitars
-                        </Link>
-                        {tabData.map((tab) => (
-                            <Link
-                                key={tab}
-                                to={`/api/v1/guitars/${tab}/byCompany`} // 동적 경로 보간 사용
-                                style={location.pathname === `/api/v1/guitars/${tab}/byCompany` ? tabActiveStyle : tabStyle}
-                            >
-                                {tab}
-                            </Link>
-                        ))}
-                    </div>
-
-                    <table style={tableStyle}>
-                        <thead>
-                        <tr>
-                            <th style={thStyle}>Image</th>
-                            <th style={thStyle}>Company</th>
-                            <th style={thStyle}>Name</th>
-                            <th style={thStyle}>Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {guitarList.map((guitar) => (
-                            <tr key={guitar.guitarId}>
-                                <td style={tdStyle}>
-                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>
-                                        <img src={guitar.image} alt={guitar.name} width="100" height="100" style={imgStyle}/>
-                                    </Link>
-                                </td>
-                                <td style={tdStyle}>{guitar.company}</td>
-                                <td style={tdStyle}>
-                                    <Link to={`/api/v1/guitars/${guitar.guitarId}`}>{guitar.name}</Link>
-                                </td>
-                                <td style={tdStyle}>
-                                    {(guitar.price - guitar.priceOfSale).toLocaleString()} ₩
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </div>
+                <GuitarList />
             )}
 
             <Routes>

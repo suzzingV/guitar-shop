@@ -113,7 +113,7 @@ function GuitarDetail() {
 
 
     return (
-        <div style={guitarDetailContainer}>
+        <div>
             <h1 style={{ textAlign: "center" }}>Guitar Detail</h1>
             <div style={guitarInfoStyle}>
                 <img src={guitar.image} alt={guitar.name} width="300" height="300" style={imageStyle} />

@@ -70,6 +70,7 @@ const adminButtonStyle = {
     border: "1px solid #2c2c36",
     borderRadius: "5px",
     cursor: "pointer",
+    marginRight: "10px",
 };
 
 function CompanyList() {
