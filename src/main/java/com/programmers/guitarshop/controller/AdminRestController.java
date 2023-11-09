@@ -18,30 +18,14 @@ import static com.programmers.guitarshop.dto.AdminRequest.*;
 @RequestMapping("/api/v1/admin")
 public class AdminRestController {
     private final AdminService adminService;
-    private final GuitarService guitarService;
-    private final CompanyService companyService;
 
-    public AdminRestController(AdminService adminService, GuitarService guitarService, CompanyService companyService) {
+    public AdminRestController(AdminService adminService) {
         this.adminService = adminService;
-        this.guitarService = guitarService;
-        this.companyService = companyService;
     }
 
     @PostMapping("/login")
     public boolean loginAdmin(@RequestBody AdminDetailRequest request) {
         log.info("id password: " + request.id() + " " + request.password());
         return adminService.isSuccess(request);
-    }
-
-    @GetMapping
-    public Map<String, Object> adminGuitars() {
-        List<ResponseGuitar.GuitarDetailResponse> guitarList = guitarService.findAll();
-        List<String> companyList = companyService.findAll();
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("byCompany", guitarList);
-        response.put("tabList", companyList);
-        log.info("into controller");
-        return response;
     }
 }

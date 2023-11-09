@@ -106,7 +106,7 @@ function AdminGuitarList() {
 
     useEffect(() => {
         // API를 호출하여 기타 데이터를 가져옵니다.
-        axios.get('/api/v1/admin')
+        axios.get('/api/v1/guitars')
             .then((response) => {
                 const data = response.data;
                 const guitarListData = data.byCompany;
