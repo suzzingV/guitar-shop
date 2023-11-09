@@ -1,10 +1,12 @@
 package com.programmers.guitarshop.repository;
 
 import com.programmers.guitarshop.exception.CartQuantityException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Slf4j
 @Repository
 public class CartMemoryRepository implements CartRepository {
 
@@ -12,7 +14,12 @@ public class CartMemoryRepository implements CartRepository {
 
     @Override
     public UUID add(UUID guitar_id) {
-        cart.put(guitar_id, 1);
+        if(cart.containsKey(guitar_id)) {
+            cart.put(guitar_id, cart.get(guitar_id) + 1);
+            log.info("카트에 이미 존재하는 상품 : " + cart.get(guitar_id));
+        } else {
+            cart.put(guitar_id, 1);
+        }
         return guitar_id;
     }
 
