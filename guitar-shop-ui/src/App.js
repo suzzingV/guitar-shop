@@ -1,19 +1,18 @@
-import React, {useState, useEffect, useCallback} from "react";
-import axios from "axios";
-import {Route, Link, Routes, useLocation, useNavigate, Navigate} from "react-router-dom";
-import GuitarDetail from "./components/GuitarDetail";
-import CompanyList from "./components/CompanyList";
-import AdministratorLogin from "./components/AdministratorLogin";
-import AdminGuitarList from "./components/AdminGuitarList";
-import AddGuitar from "./components/AddGuitar";
-import AdminCompanyList from "./components/AdminCompanyList";
-import AdminGuitarDetail from "./components/AdminGuitarDetail";
-import AdminEditGuitar from "./components/AdminEditGuitar";
-import Cart from "./components/Cart";
-import GuitarCartOrder from "./components/GuitarCartOrder";
-import GuitarOrder from "./components/GuitarOrder";
-import GuitarList from "./components/GuitarList";
-import Welcome from "./components/Welcome"; // GuitarDetail 컴포넌트를 가져옴
+import React from "react";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import CustomerGuitarDetail from "./components/Customer/CustomerGuitarDetail";
+import CustomerCompanyList from "./components/Customer/CustomerCompanyList";
+import AdminLogin from "./components/Admin/AdminLogin";
+import AdminGuitarList from "./components/Admin/AdminGuitarList";
+import AdminAddGuitar from "./components/Admin/AdminAddGuitar";
+import AdminListByCompany from "./components/Admin/AdminListByCompany";
+import AdminGuitarDetail from "./components/Admin/AdminGuitarDetail";
+import AdminEditGuitar from "./components/Admin/AdminEditGuitar";
+import CustomerCart from "./components/Customer/CustomerCart";
+import CustomerCartOrder from "./components/Customer/CustomerCartOrder";
+import CustomerGuitarOrder from "./components/Customer/CustomerGuitarOrder";
+import CustomerGuitarList from "./components/Customer/CustomerGuitarList";
+import Welcome from "./components/welcome/Welcome"; // CustomerGuitarDetail 컴포넌트를 가져옴
 
 const appContainer = {
     maxWidth: "800px",
@@ -49,7 +48,6 @@ const tabActiveStyle = {
     backgroundColor: "#333",
     color: "#fff",
 };
-
 
 
 const tableStyle = {
@@ -100,28 +98,28 @@ function App() {
     return (
         <div style={appContainer}>
             {location.pathname === "/api/v1/guitars" && (
-            <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
-                <button style={adminButtonStyle} onClick={openCart}>Cart</button>
-            </div>
+                <div style={{display: "flex", justifyContent: "flex-end", alignItems: "flex-start"}}>
+                    <button style={adminButtonStyle} onClick={openCart}>Cart</button>
+                </div>
             )}
 
             {location.pathname === "/api/v1/guitars" && ( // 경로가 루트 경로인 경우에만 출력
-                <GuitarList />
+                <CustomerGuitarList/>
             )}
 
             <Routes>
-                <Route path="/api/v1/guitars/:company/byCompany" element={<CompanyList />} />
-                <Route path="/api/v1/guitars/:guitarId" element={<GuitarDetail />} />
-                <Route path="/api/v1/admin/login" element={<AdministratorLogin />} />
-                <Route path="/api/v1/admin" element={<AdminGuitarList />} />
-                <Route path="/api/v1/guitars/guitar" element={<AddGuitar />} />
-                <Route path="/api/v1/admin/:company/byCompany" element={<AdminCompanyList />} />
-                <Route path="/api/v1/admin/edit/:guitarId" element={<AdminEditGuitar />} />
-                <Route path="/api/v1/admin/:guitarId" element={<AdminGuitarDetail />} />
-                <Route path="/api/v1/cart" element={<Cart/>} />
-                <Route path="/api/v1/order" element={<GuitarCartOrder/>} />
-                <Route path="/api/v1/order/:guitarId" element={<GuitarOrder/>} />
-                <Route path="/" element={<Welcome/>} />
+                <Route path="/api/v1/guitars/:company/byCompany" element={<CustomerCompanyList/>}/>
+                <Route path="/api/v1/guitars/:guitarId" element={<CustomerGuitarDetail/>}/>
+                <Route path="/api/v1/admin/login" element={<AdminLogin/>}/>
+                <Route path="/api/v1/admin" element={<AdminGuitarList/>}/>
+                <Route path="/api/v1/guitars/guitar" element={<AdminAddGuitar/>}/>
+                <Route path="/api/v1/admin/:company/byCompany" element={<AdminListByCompany/>}/>
+                <Route path="/api/v1/admin/edit/:guitarId" element={<AdminEditGuitar/>}/>
+                <Route path="/api/v1/admin/:guitarId" element={<AdminGuitarDetail/>}/>
+                <Route path="/api/v1/cart" element={<CustomerCart/>}/>
+                <Route path="/api/v1/order" element={<CustomerCartOrder/>}/>
+                <Route path="/api/v1/order/:guitarId" element={<CustomerGuitarOrder/>}/>
+                <Route path="/" element={<Welcome/>}/>
 
             </Routes>
         </div>
