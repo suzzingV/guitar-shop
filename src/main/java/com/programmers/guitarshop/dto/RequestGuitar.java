@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class RequestGuitar {
 
-    public record GuitarDetailRequest(UUID guitarId, String name, String company, String country, LocalDate manufactureDate, long price, long priceOfSale, String description, String image) {
+    public record GuitarDetailRequest(UUID guitarId, String name, String company, String country, LocalDate manufactureDate, long price, long priceOfSale, String description, String image, long quantity) {
         @Builder
         public GuitarDetailRequest {
         }

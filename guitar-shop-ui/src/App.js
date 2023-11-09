@@ -8,7 +8,8 @@ import AdminGuitarList from "./components/AdminGuitarList";
 import AddGuitar from "./components/AddGuitar";
 import AdminCompanyList from "./components/AdminCompanyList";
 import AdminGuitarDetail from "./components/AdminGuitarDetail";
-import AdminEditGuitar from "./components/AdminEditGuitar"; // GuitarDetail 컴포넌트를 가져옴
+import AdminEditGuitar from "./components/AdminEditGuitar";
+import Cart from "./components/Cart"; // GuitarDetail 컴포넌트를 가져옴
 
 const appContainer = {
     maxWidth: "800px",
@@ -72,6 +73,7 @@ const imgStyle = {
 };
 
 const adminButtonStyle = {
+    marginRight: "10px",
     padding: "5px 15px",
     color: "#2c2c36",
     border: "1px solid #2c2c36",
@@ -103,10 +105,15 @@ function App() {
         navigate("/api/v1/admin/login");
     };
 
+    const openCart = () => {
+        navigate("/api/v1/cart");
+    };
+
     return (
         <div style={appContainer}>
             {location.pathname === "/api/v1/guitars" && (
             <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "flex-start" }}>
+                <button style={adminButtonStyle} onClick={openCart}>Cart</button>
                 <button style={adminButtonStyle} onClick={openAdminMode}>Administrator mode</button>
             </div>
             )}
@@ -173,6 +180,7 @@ function App() {
                 <Route path="/api/v1/admin/:company/byCompany" element={<AdminCompanyList />} />
                 <Route path="/api/v1/admin/edit/:guitarId" element={<AdminEditGuitar />} />
                 <Route path="/api/v1/admin/:guitarId" element={<AdminGuitarDetail />} />
+                <Route path="/api/v1/cart" element={<Cart/>} />
             </Routes>
         </div>
     );

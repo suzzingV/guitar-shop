@@ -69,6 +69,11 @@ public class GuitarJdbcRepository implements GuitarRepository {
         return template.queryForObject(FIND_BY_ID_GUITAR.getMessage(), new MapSqlParameterSource("guitarId", id.toString().getBytes()), guitarRowmapper);
     }
 
+    @Override
+    public long increaseQuantity() {
+        return 0;
+    }
+
     private static final RowMapper<Guitar> guitarRowmapper = (rs, i) -> {
         return new Guitar(toUUID(rs.getBytes("guitar_id")),
                 rs.getString("name"),

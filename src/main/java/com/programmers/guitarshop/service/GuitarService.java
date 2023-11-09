@@ -32,8 +32,7 @@ public class GuitarService {
 
     private List<GuitarDetailResponse> getGuitarDetailResponses(List<Guitar> guitars) {
         return guitars.stream()
-                .map(ResponseGuitar::toGuitarDetailResponse
-                ).toList();
+                .map(guitar -> ResponseGuitar.toGuitarDetailResponse(guitar, 1)).toList();
     }
 
     public GuitarDetailResponse create(CreateGuitarRequest request) {
@@ -42,7 +41,7 @@ public class GuitarService {
         log.info("created guitar id : " + guitar.getGuitarId());
         Guitar createdGuitar = repository.create(guitar);
         companyRepository.create(request.company());
-        return toGuitarDetailResponse(createdGuitar);
+        return toGuitarDetailResponse(createdGuitar, 1);
     }
 
     public void delete(UUID guitarId) {
@@ -61,7 +60,7 @@ public class GuitarService {
                 request.image());
         Guitar update = repository.update(guitar);
 
-        return toGuitarDetailResponse(update);
+        return toGuitarDetailResponse(update, 1);
     }
 
     public List<GuitarDetailResponse> findByCompany(String company) {
@@ -76,6 +75,6 @@ public class GuitarService {
 
     public GuitarDetailResponse findById(UUID id) {
         Guitar byId = repository.findById(id);
-        return toGuitarDetailResponse(byId);
+        return toGuitarDetailResponse(byId, 1);
     }
 }

@@ -15,4 +15,6 @@ public interface GuitarRepository {
     public void delete(UUID guitarId);
 
     public Guitar findById(UUID id);
+
+    public long increaseQuantity();
 }

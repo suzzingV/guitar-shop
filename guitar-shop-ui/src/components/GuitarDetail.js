@@ -95,6 +95,18 @@ function GuitarDetail() {
             .catch((error) => console.error(error));
     }, [guitarId]);
 
+    const addToCart = () => {
+        axios.post(`/api/v1/cart/${guitarId}`)
+            .then((response) => {
+                const shouldRedirect = window.confirm(response.data);
+                if (shouldRedirect) {
+                    window.location.href = "/api/v1/cart";
+                }
+            })
+            .catch((error) => console.error(error));
+    };
+
+
     return (
         <div style={guitarDetailContainer}>
             <h1 style={{ textAlign: "center" }}>Guitar Detail</h1>
@@ -113,7 +125,7 @@ function GuitarDetail() {
                         <p style={priceStyle}>{guitar.price}원</p>
                     )}
                     <div style={buttonContainer}>
-                        <a href="#" style={buttonStyle}>Add to Cart</a>
+                        <button onClick={addToCart} style={buttonStyle}>Add to Cart</button>
                         <a href="#" style={buttonStyle}>Buy Now</a>
                     </div>
                 </div>

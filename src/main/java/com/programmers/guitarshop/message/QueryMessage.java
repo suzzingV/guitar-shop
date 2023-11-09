@@ -13,7 +13,7 @@ public enum QueryMessage {
     UPDATE_GUITAR("update guitars set name = :name, company = :company, country = :country, manufacture_date = :manufactureDate, price = :price, price_of_sale = :priceOfSale, description = :description, image = :image where guitar_id = UUID_TO_BIN(:guitarId);"),
     DELETE_GUITAR("delete from guitars where guitar_id = UUID_TO_BIN(:guitarId)"),
 
-    CREATE_COMPANY("insert into companies (name) values(:name)"),
+    CREATE_COMPANY("insert ignore into companies (name) values(:name)"),
     FIND_ALL_COMPANY("select * from companies"),
 
     FIND_BY_ID_ADMIN("select * from admins where id = :id");
