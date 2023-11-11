@@ -85,6 +85,21 @@ function CustomerCartOrder() {
                 .then((response) => {
                     console.log("주문");
                     navigate("/api/v1/guitars");
+                    axios.delete('/api/v1/cart')
+                        .then(() => {
+                            console.log("카트 비우기 성공");
+                            window.alert("주문을 완료했습니다.");
+                            navigate("/api/v1/guitars");
+                        })
+                        .catch((error) => {
+                            if (error.response) {
+                                console.log("에러 메시지: " + error.response.data);
+                                setError(error.response.data);
+                            } else {
+                                setError("카트 비우기 중 오류 발생");
+                            }
+                            console.error(error);
+                        });
                 })
                 .catch((error) => {
                     if (error.response) {
@@ -92,22 +107,6 @@ function CustomerCartOrder() {
                         setError(error.response.data);
                     } else {
                         setError("주문 중 오류 발생");
-                    }
-                    console.error(error);
-                });
-
-            axios.delete('/api/v1/cart')
-                .then(() => {
-                    console.log("카트 비우기 성공");
-                    window.alert("주문을 완료했습니다.");
-                    navigate("/api/v1/guitars");
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        console.log("에러 메시지: " + error.response.data);
-                        setError(error.response.data);
-                    } else {
-                        setError("카트 비우기 중 오류 발생");
                     }
                     console.error(error);
                 });
